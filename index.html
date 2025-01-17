@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+    <title>The Hall - Menù Dinamico</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: #111;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #eee;
+        }
+
+        .language-selector {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .container {
+            max-width: 600px;
+            background: #1a1a1a; 
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 200px;
+        }
+
+        .menu-button {
+            display: block;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background 0.3s ease;
+            text-align: center;
+            height: 100px;
+            line-height: 100px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+            filter: brightness(0.9);
+        }
+
+        .menu-button:hover {
+            filter: brightness(0.8);
+        }
+
+        .button-colazione {
+            background-image: url('banner_Colazione.jpg');
+        }
+
+        .button-room-service {
+            background-image: url('banner_Room_Service.jpg');
+        }
+
+        .button-notturno {
+            background-image: url('banner_Notturno.jpg');
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="language-selector">
+    <label for="language">Seleziona la lingua / Select Language:</label>
+    <select id="language">
+        <option value="it">Italiano</option>
+        <option value="en">English</option>
+    </select>
+</div>
+
+<img src="Logo_TheHall.png" alt="Logo The Hall" class="logo">
+
+<div class="container lang-block" id="it">
+    <h1>Benvenuti a The Hall</h1>
+    <div id="menu-it">
+        <!-- I pulsanti dinamici verranno inseriti qui -->
+    </div>
+</div>
+
+<div class="container lang-block hidden" id="en">
+    <h1>Welcome to The Hall</h1>
+    <div id="menu-en">
+        <!-- I pulsanti dinamici verranno inseriti qui -->
+    </div>
+</div>
+
+<script>
+    const languageSelector = document.getElementById('language');
+    const langBlocks = document.querySelectorAll('.lang-block');
+
+    // Funzione per mostrare/nascondere le lingue
+    function showLanguage(lang) {
+        langBlocks.forEach(block => {
+            block.classList.toggle('hidden', block.id !== lang);
+        });
+    }
+
+    // Mostra la lingua italiana di default
+    showLanguage('it');
+
+    languageSelector.addEventListener('change', (e) => {
+        showLanguage(e.target.value);
+    });
+
+    // Funzione per ottenere l'orario attuale e configurare i pulsanti
+    function getCurrentMenu() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+
+        // Definizione delle fasce orarie
+        const isBreakfast = hours >= 7 && (hours < 10 || (hours === 10 && minutes <= 29));
+        const isNight = hours >= 23 || hours < 7;
+
+        // Elementi dei menu
+        const menuIt = document.getElementById('menu-it');
+        const menuEn = document.getElementById('menu-en');
+
+        menuIt.innerHTML = '';
+        menuEn.innerHTML = '';
+
+        if (isBreakfast) {
+            // Colazione e Room Service
+            menuIt.innerHTML += `<a href="Colazioni_ITA.html" class="menu-button button-colazione">Colazione</a>`;
+            menuIt.innerHTML += `<a href="Room_Service_ITA.html" class="menu-button button-room-service">Room Service</a>`;
+
+            menuEn.innerHTML += `<a href="Colazioni_ENG.html" class="menu-button button-colazione">Breakfast</a>`;
+            menuEn.innerHTML += `<a href="Room_Service_ENG.html" class="menu-button button-room-service">Room Service</a>`;
+        } else if (isNight) {
+            // Solo Room Service Notturno
+            menuIt.innerHTML += `<a href="Notturno_ITA.html" class="menu-button button-notturno">Room Service Notturno</a>`;
+
+            menuEn.innerHTML += `<a href="Notturno_ENG.html" class="menu-button button-notturno">Night Room Service</a>`;
+        } else {
+            // Solo Room Service
+            menuIt.innerHTML += `<a href="Room_Service_ITA.html" class="menu-button button-room-service">Room Service</a>`;
+
+            menuEn.innerHTML += `<a href="Room_Service_ENG.html" class="menu-button button-room-service">Room Service</a>`;
+        }
+    }
+
+    // Aggiorna i menu al caricamento della pagina
+    getCurrentMenu();
+</script>
+
+</body>
+</html>
