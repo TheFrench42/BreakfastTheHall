@@ -105,7 +105,7 @@
 </div>
 
 <div class="container lang-block hidden" id="en">
-    <h1>Welcome to The Hall</h1>
+    <h1>Welcome to The Haven</h1>
     <div id="menu-en">
         <!-- I pulsanti dinamici verranno inseriti qui -->
     </div>
@@ -136,7 +136,8 @@
 
         // Definizione delle fasce orarie
         const isBreakfast = hours >= 7 && (hours < 10 || (hours === 10 && minutes <= 29));
-        const isNight = hours >= 23 || hours < 7;
+        const isNight = hours >= 12 || hours < 7;
+        // const isNight = hours >= 23 || hours < 7;
 
         // Elementi dei menu
         const menuIt = document.getElementById('menu-it');
