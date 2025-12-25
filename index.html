@@ -136,7 +136,7 @@
 
         // Definizione delle fasce orarie
         const isBreakfast = hours >= 7 && (hours < 10 || (hours === 10 && minutes <= 29));
-        const isNight = hours >= 23 || hours < 7;
+        const isNight = hours >= 10 || hours < 7;
 
         // Elementi dei menu
         const menuIt = document.getElementById('menu-it');
@@ -172,4 +172,5 @@
 
 </body>
 </html>
+
 
