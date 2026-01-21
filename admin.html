@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Haven | Admin</title>
+  <meta name="description" content="Area riservata per gestione menu e orari." />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body data-page="admin">
+  <main class="page">
+    <header class="hero card admin-hero">
+      <div class="hero-top">
+        <img src="assets/images/Logo_TheHaven.png" alt="Logo The Haven" class="logo" />
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Area riservata</p>
+        <h1>Gestione Menu</h1>
+        <p class="lead">Orari, piatti e prezzi in un solo posto.</p>
+      </div>
+    </header>
+
+    <section class="card admin-card" id="login-card">
+      <h2>Accesso</h2>
+      <form id="login-form" class="admin-form">
+        <div class="admin-grid">
+          <div class="field">
+            <label for="username">Utente</label>
+            <input type="text" id="username" name="username" autocomplete="username" required />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required />
+          </div>
+        </div>
+        <button type="submit" class="btn primary">Entra</button>
+        <p class="admin-message" id="login-message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="card admin-card is-hidden" id="editor-card">
+      <div class="admin-toolbar">
+        <h2>Editor</h2>
+        <div class="admin-actions">
+          <button class="btn secondary" type="button" id="save-local">Salva nel browser</button>
+          <button class="btn primary" type="button" id="export-data">Esporta menu-data.js</button>
+          <button class="btn ghost" type="button" id="reset-data">Ripristina</button>
+        </div>
+      </div>
+      <p class="admin-hint">
+        Le modifiche si salvano solo nel tuo browser. Per pubblicarle su GitHub, esporta il file
+        <code>menu-data.js</code> e sostituiscilo in <code>assets/js/menu-data.js</code>. Apri questa pagina
+        da un server locale (http://localhost) o HTTPS per abilitare il login.
+      </p>
+      <p class="admin-message" id="admin-message" aria-live="polite"></p>
+      <div id="menu-editor"></div>
+    </section>
+  </main>
+
+  <script src="assets/js/menu-data.js" defer></script>
+  <script src="assets/js/admin.js" defer></script>
+</body>
+</html>
